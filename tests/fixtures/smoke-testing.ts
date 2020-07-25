@@ -1,5 +1,5 @@
 import {
-  MapLike
+  MapLike,
   AsyncMapLike,
   VERSION,
 }               from 'async-map-like'
