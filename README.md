@@ -24,7 +24,7 @@ That's it, enjoy the [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)!
 
 ### master
 
-### v0.0.1 (July 25, 2020)
+### v0.2 (July 25, 2020)
 
 1. Create `MapLike` interface for ES6 Map
 1. Create `AsyncMapLike` for ES6 Map like Async interface
