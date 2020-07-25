@@ -2,9 +2,21 @@
 
 ECMAScript `Map` like type definition (plus Async).
 
-It has same API with [Map - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map "Map - JavaScript | MDN").
+[![Async ES6 Map Like TypeScript Interface](docs/images/async-es6-map.png)](https://github.com/huan/async-map-like)
 
-## CHANGELOG
+It has same API Interface with [Map - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map "Map - JavaScript | MDN"), with additional **Async** support.
+
+## Usage
+
+```ts
+import { MapLike } from 'async-map-like'
+
+const mapLike: MapLike<string, number> = new Map<string, number>
+```
+
+That's it, enjoy the [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)!
+
+## History
 
 ### master
 
