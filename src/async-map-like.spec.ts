@@ -6,9 +6,9 @@ import { AsyncMapLike } from './async-map-like'
 
 test('AsyncMapLike Interface via object', async (t) => {
   const mapCollection = {
-    clear: async (): Promise<void> => {},
-    delete: async (key: any): Promise<boolean> => { return !!key },
-    forEach: async (
+    clear   : async ()         : Promise<void> => {},
+    delete  : async (key: any) : Promise<boolean> => { return !!key },
+    forEach : async (
       callbackfn: (
         value: any,
         key: any,
@@ -16,17 +16,17 @@ test('AsyncMapLike Interface via object', async (t) => {
       ) => void,
       thisArg?: any,
     ): Promise<void> => { void callbackfn; void thisArg },
-    get: async (_: any): Promise<any> => {},
-    has: async (key: any): Promise<boolean> => !!key,
-    set: async function (_: any, __: any): Promise<any> { return ({} as any) },
-    size: Promise.resolve(42),
+    get  : async (_: any)                   : Promise<any> => {},
+    has  : async (key: any)                 : Promise<boolean> => !!key,
+    set  : async function (_: any, __: any) : Promise<any> { return ({} as any) },
+    size : Promise.resolve(42),
   }
 
   const mapIterable = {
-    [Symbol.iterator]: (): AsyncIterableIterator<[any, any]> => { return {} as any },
-    entries: (): AsyncIterableIterator<[any, any]> => { return {} as any },
-    keys: (): AsyncIterableIterator<any> => { return {} as any },
-    values: (): AsyncIterableIterator<any> => { return {} as any },
+    [Symbol.iterator] : () : AsyncIterableIterator<[any, any]> => { return {} as any },
+    entries           : () : AsyncIterableIterator<[any, any]> => { return {} as any },
+    keys              : () : AsyncIterableIterator<any> => { return {} as any },
+    values            : () : AsyncIterableIterator<any> => { return {} as any },
   }
 
   const mapLike: AsyncMapLike<any, any> = {
@@ -43,7 +43,7 @@ test('AsyncMapLike Interface via class', async (t) => {
     constructor () {}
 
     /**
-     * Collection
+     * Collections
      */
     async clear (): Promise<void> {}
     async delete (key: string): Promise<boolean> { return !!key }
@@ -59,18 +59,18 @@ test('AsyncMapLike Interface via class', async (t) => {
       thisArg?: any,
     ): Promise<void> { void callbackfn; void thisArg }
 
-    async get (key: string): Promise<number> { void key; return 42 }
-    async has (key: string): Promise<boolean> { return !!key }
-    async set (key: string, value: number): Promise<this> { void key; void value; return this }
+    async get (key: string)                : Promise<number> { void key; return 42 }
+    async has (key: string)                : Promise<boolean> { return !!key }
+    async set (key: string, value: number) : Promise<this> { void key; void value; return this }
     get size () { return Promise.resolve(42) }
 
     /**
-     * Interable
+     * Iterables
      */
-    [Symbol.iterator] (): AsyncIterableIterator<[string, number]> { return {} as any }
-    entries (): AsyncIterableIterator<[string, number]> { return {} as any }
-    keys (): AsyncIterableIterator<string> { return {} as any }
-    values (): AsyncIterableIterator<number> { return {} as any }
+    [Symbol.iterator] () : AsyncIterableIterator<[string, number]> { return {} as any }
+    entries           () : AsyncIterableIterator<[string, number]> { return {} as any }
+    keys              () : AsyncIterableIterator<string> { return {} as any }
+    values            () : AsyncIterableIterator<number> { return {} as any }
 
     get [Symbol.toStringTag] () { return 'test' }
 
@@ -86,10 +86,10 @@ test('AsyncMapLike Interface via class generic', async (t) => {
     constructor () {}
 
     /**
-     * Collection
+     * Collections
      */
-    async clear (): Promise<void> {}
-    async delete (key: K): Promise<boolean> { return !!key }
+    async clear ()        : Promise<void> {}
+    async delete (key: K) : Promise<boolean> { return !!key }
     async forEach (
       callbackfn: (
         value: V,
@@ -102,18 +102,18 @@ test('AsyncMapLike Interface via class generic', async (t) => {
       thisArg?: any,
     ): Promise<void> { void callbackfn; void thisArg }
 
-    async get (key: K): Promise<V> { void key; return 42 as any as V }
-    async has (key: K): Promise<boolean> { return !!key }
-    async set (key: K, value: V): Promise<this> { void key; void value; return this }
+    async get (key: K)           : Promise<V> { void key; return 42 as any as V }
+    async has (key: K)           : Promise<boolean> { return !!key }
+    async set (key: K, value: V) : Promise<this> { void key; void value; return this }
     get size () { return Promise.resolve(42) }
 
     /**
-     * Interable
+     * Iterables
      */
-    [Symbol.iterator] (): AsyncIterableIterator<[K, V]> { return {} as any }
-    entries (): AsyncIterableIterator<[K, V]> { return {} as any }
-    keys (): AsyncIterableIterator<K> { return {} as any }
-    values (): AsyncIterableIterator<V> { return {} as any }
+    [Symbol.iterator] () : AsyncIterableIterator<[K, V]> { return {} as any }
+    entries           () : AsyncIterableIterator<[K, V]> { return {} as any }
+    keys              () : AsyncIterableIterator<K> { return {} as any }
+    values            () : AsyncIterableIterator<V> { return {} as any }
 
     get [Symbol.toStringTag] () { return 'test' }
 
