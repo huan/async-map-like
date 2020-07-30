@@ -12,7 +12,7 @@ type AsyncifyIterator<R extends IterableIterator<any>> = R extends IterableItera
 type AsyncifyIteratorFunction <T extends AnyFunction> = (...args: Parameters<T>) => AsyncifyIterator<ReturnType<T>>
 type AsyncifyBooleanFunction  <T extends AnyFunction> = (...args: Parameters<T>) => Promise<boolean>
 type AsyncifyMapFunction<K, V, T extends AnyFunction> = (...args: Parameters<T>) => Promise<AsyncMapLike<K, V>>
-type AsyncifySimpleFunction    <T extends AnyFunction> = (...args: Parameters<T>) => Promise<ReturnType<T>>
+type AsyncifySimpleFunction   <T extends AnyFunction> = (...args: Parameters<T>) => Promise<ReturnType<T>>
 
 type Asyncify<NAME, T> = T extends AnyFunction ?
   /**
@@ -27,7 +27,7 @@ type Asyncify<NAME, T> = T extends AnyFunction ?
   /**
    * Properties
    */
-  : Promise<T>  // 1. for properties
+  : Promise<T>
 
 export type AsyncMapLike<K, V> = {
   [N in keyof Map<K, V>]: Asyncify<N, Map<K, V>[N]>
