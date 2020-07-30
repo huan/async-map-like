@@ -79,3 +79,46 @@ test('AsyncMapLike Interface via class', async (t) => {
   const mapLike = new TestAsyncMapLike()
   t.ok(mapLike, 'should be implement-able from AsyncMapLike')
 })
+
+test('AsyncMapLike Interface via class generic', async (t) => {
+  class TestAsyncMapLike<K, V> implements AsyncMapLike<K, V> {
+
+    constructor () {}
+
+    /**
+     * Collection
+     */
+    async clear (): Promise<void> {}
+    async delete (key: K): Promise<boolean> { return !!key }
+    async forEach (
+      callbackfn: (
+        value: V,
+        key: K,
+        // map: TestAsyncMapLike,
+        // FIXME(huan) 202007: we have to use any at here, because the typing system is very hard to
+        //  rename `Map` to `TestAsyncMapLike` in this method function parameters.
+        map: any,
+      ) => void,
+      thisArg?: any,
+    ): Promise<void> { void callbackfn; void thisArg }
+
+    async get (key: K): Promise<V> { void key; return 42 as any as V }
+    async has (key: K): Promise<boolean> { return !!key }
+    async set (key: K, value: V): Promise<this> { void key; void value; return this }
+    get size () { return Promise.resolve(42) }
+
+    /**
+     * Interable
+     */
+    [Symbol.iterator] (): AsyncIterableIterator<[K, V]> { return {} as any }
+    entries (): AsyncIterableIterator<[K, V]> { return {} as any }
+    keys (): AsyncIterableIterator<K> { return {} as any }
+    values (): AsyncIterableIterator<V> { return {} as any }
+
+    get [Symbol.toStringTag] () { return 'test' }
+
+  }
+
+  const mapLike = new TestAsyncMapLike<string, number>()
+  t.ok(mapLike, 'should be implement-able from AsyncMapLike')
+})
