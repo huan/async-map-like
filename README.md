@@ -20,6 +20,39 @@ const mapLike: MapLike<string, number> = new Map<string, number>
 
 That's it, enjoy the [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)!
 
+## API Reference
+
+```ts
+/**
+ * ES6 Map like Async API
+ */
+export interface AsyncMapLike<K = any, V = any> {
+
+  size : Promise<number>
+
+  get     (key: K)           : Promise<V | undefined>
+  set     (key: K, value: V) : Promise<void>
+  has     (key: K)           : Promise<boolean>
+  delete  (key: K)           : Promise<void>
+  clear   ()                 : Promise<void>
+
+  entries () : AsyncIterableIterator<[K, V]>
+  keys    () : AsyncIterableIterator<K>
+  values  () : AsyncIterableIterator<V>
+
+  [Symbol.asyncIterator]() : AsyncIterableIterator<[K, V]>
+
+  forEach () : async forEach<T> (
+    callbackfn: (
+      value: T,
+      key: K,
+      map: AsyncMapLike<K, V>,
+    ) => void,
+    thisArg?: any,
+  ): Promise<void>
+  
+}
+```
 ## History
 
 ### master
