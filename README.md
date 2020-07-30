@@ -48,7 +48,7 @@ export interface AsyncMapLike<K = any, V = any> {
       key   : K,
       map   : AsyncMapLike<K, V>,
     ) => void,
-    thisArg?: any,
+    thisArg?: AsyncMapLike<K, V>,
   ): Promise<void>
 
 }
