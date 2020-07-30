@@ -42,15 +42,15 @@ export interface AsyncMapLike<K = any, V = any> {
 
   [Symbol.asyncIterator]() : AsyncIterableIterator<[K, V]>
 
-  forEach () : async forEach<T> (
+  forEach (
     callbackfn: (
-      value: T,
-      key: K,
-      map: AsyncMapLike<K, V>,
+      value : V,
+      key   : K,
+      map   : AsyncMapLike<K, V>,
     ) => void,
     thisArg?: any,
   ): Promise<void>
-  
+
 }
 ```
 ## History
