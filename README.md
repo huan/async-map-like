@@ -1,7 +1,7 @@
 # async-map-like
 
 [![NPM Version](https://img.shields.io/npm/v/async-map-like?color=brightgreen)](https://www.npmjs.com/package/async-map-like)
-![NPM](https://github.com/huan/async-map-like/workflows/NPM/badge.svg)
+[![NPM](https://github.com/huan/async-map-like/actions/workflows/npm.yml/badge.svg)](https://github.com/huan/async-map-like/actions/workflows/npm.yml)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 
 ECMAScript `Map` like type definition (plus Async).
