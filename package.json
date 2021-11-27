@@ -1,6 +1,6 @@
 {
   "name": "async-map-like",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "ES6 Map TypeScript Interface with Async Support",
   "type": "module",
   "exports": {
