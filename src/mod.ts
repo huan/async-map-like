@@ -1,4 +1,4 @@
-export { VERSION }      from './version'
+export { VERSION }      from './version.js'
 
-export { MapLike }      from './map-like'
-export { AsyncMapLike } from './async-map-like'
+export type { MapLike }      from './map-like.js'
+export type { AsyncMapLike } from './async-map-like.js'

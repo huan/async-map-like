@@ -1,8 +1,8 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env -S node --no-warnings --loader ts-node/esm
 
 import { test }  from 'tstest'
 
-import { MapLike } from './map-like'
+import type { MapLike } from './map-like.js'
 
 test('MapLike Interface', async (t) => {
   const mapLike: MapLike<any, any> = new Map<any, any>()

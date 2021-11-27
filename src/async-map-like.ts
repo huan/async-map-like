@@ -1,3 +1,11 @@
+/* eslint-disable no-use-before-define */
+import type { MapLike } from './map-like.js'
+
+type MapLikeNoSync<K, V> = Omit<
+  MapLike<K, V>,
+  typeof Symbol.toStringTag | typeof Symbol.iterator
+>
+
 type IteratorMethod = 'entries' | 'keys' | 'values'
 type GetMethod      = 'get'
 type AnyFunction    = (...args: any) => any
@@ -29,6 +37,23 @@ type Asyncify<NAME, T> = T extends AnyFunction ?
    */
   : Promise<T>
 
-export type AsyncMapLike<K, V> = {
-  [N in keyof Map<K, V>]: Asyncify<N, Map<K, V>[N]>
+type AsyncMapBase<K, V> = {
+  [N in keyof MapLikeNoSync<K, V>]: Asyncify<N, MapLikeNoSync<K, V>[N]>
+}
+
+interface AsyncMapIterator<K, V> {
+  /**
+   * Huan(202111): we have removed the `[Symbol.iterator]`, and add the below `[Symbol.asyncIterator]` for Async
+   */
+  [Symbol.asyncIterator]: () => AsyncifyIterator<
+    ReturnType<
+      Map<K, V>[typeof Symbol.iterator]
+    >
+  >
+}
+
+type AsyncMapLike<K, V> = AsyncMapBase<K, V> & AsyncMapIterator<K, V>
+
+export type {
+  AsyncMapLike,
 }

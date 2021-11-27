@@ -53,9 +53,13 @@ export interface AsyncMapLike<K = any, V = any> {
 
 }
 ```
+
 ## History
 
-### master
+### master v1.0 (Nov 27, 2021)
+
+1. Remove sync interface: `[Symbol.toStringTag]()` and `[Symbol.iterator]()`
+1. Add async interface: `[Symbol.asyncIterator]()`
 
 ### v0.2 (July 25, 2020)
 

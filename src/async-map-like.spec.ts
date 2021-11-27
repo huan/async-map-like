@@ -1,8 +1,8 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env -S node --no-warnings --loader ts-node/esm
 
 import { test }  from 'tstest'
 
-import { AsyncMapLike } from './async-map-like'
+import type { AsyncMapLike } from './async-map-like.js'
 
 test('AsyncMapLike Interface via object', async (t) => {
   const mapCollection = {
@@ -23,10 +23,10 @@ test('AsyncMapLike Interface via object', async (t) => {
   }
 
   const mapIterable = {
-    [Symbol.iterator] : () : AsyncIterableIterator<[any, any]> => { return {} as any },
     entries           : () : AsyncIterableIterator<[any, any]> => { return {} as any },
     keys              : () : AsyncIterableIterator<any> => { return {} as any },
     values            : () : AsyncIterableIterator<any> => { return {} as any },
+    [Symbol.asyncIterator]: () : AsyncIterableIterator<[any, any]> => { return {} as any },
   }
 
   const mapLike: AsyncMapLike<any, any> = {
@@ -67,12 +67,10 @@ test('AsyncMapLike Interface via class', async (t) => {
     /**
      * Iterables
      */
-    [Symbol.iterator] () : AsyncIterableIterator<[string, number]> { return {} as any }
     entries           () : AsyncIterableIterator<[string, number]> { return {} as any }
     keys              () : AsyncIterableIterator<string> { return {} as any }
     values            () : AsyncIterableIterator<number> { return {} as any }
-
-    get [Symbol.toStringTag] () { return 'test' }
+    [Symbol.asyncIterator] () : AsyncIterableIterator<[any, any]> { return {} as any }
 
   }
 
@@ -108,17 +106,25 @@ test('AsyncMapLike Interface via class generic', async (t) => {
     get size () { return Promise.resolve(42) }
 
     /**
-     * Iterables
+     * AsyncIterables
      */
-    [Symbol.iterator] () : AsyncIterableIterator<[K, V]> { return {} as any }
     entries           () : AsyncIterableIterator<[K, V]> { return {} as any }
     keys              () : AsyncIterableIterator<K> { return {} as any }
     values            () : AsyncIterableIterator<V> { return {} as any }
-
-    get [Symbol.toStringTag] () { return 'test' }
+    [Symbol.asyncIterator] () : AsyncIterableIterator<[any, any]> {
+      return {
+        [Symbol.asyncIterator]: this[Symbol.asyncIterator],
+        next: () => Promise.resolve({ done: true, value: undefined }),
+      }
+    }
 
   }
 
   const mapLike = new TestAsyncMapLike<string, number>()
   t.ok(mapLike, 'should be implement-able from AsyncMapLike')
+
+  /**
+   * Just check for the types
+   */
+  for await (const kv of mapLike) { void kv }
 })
